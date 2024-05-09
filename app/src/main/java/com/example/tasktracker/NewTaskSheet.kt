@@ -1,17 +1,16 @@
 package com.example.tasktracker
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.tasktracker.databinding.FragmentNewTaskSheetBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class NewTaskSheet : BottomSheetDialogFragment() {
+class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
 
             private lateinit var binding: FragmentNewTaskSheetBinding
             private lateinit var taskViewModel: TaskViewModel
@@ -20,6 +19,16 @@ class NewTaskSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val activity = requireActivity()
+
+        if(taskItem != null){
+            binding.taskTitle.text = getString(R.string.EditTask)
+            val editable = Editable.Factory.getInstance()
+            binding.name.text = editable.newEditable(taskItem!!.name)
+            binding.name.text = editable.newEditable(taskItem!!.desc)
+        }else
+        {
+            binding.taskTitle.text = getString(R.string.NewTask)
+        }
         taskViewModel = ViewModelProvider(activity).get(TaskViewModel::class.java)
         binding.saveButton.setOnClickListener {
             saveButton()
@@ -33,8 +42,14 @@ class NewTaskSheet : BottomSheetDialogFragment() {
     }
 
     private fun saveButton(){
-        taskViewModel.name.value = binding.name.text.toString()
-        taskViewModel.desc.value = binding.desc.text.toString()
+        val name = binding.name.text.toString()
+        val desc = binding.desc.text.toString()
+        if (taskItem == null){
+            val newTask = TaskItem(name,desc,null,null)
+            taskViewModel.addTaskItem(newTask)
+        }else{
+            taskViewModel.updateTaskItem(taskItem!!.id, name, desc, null)
+        }
         binding.name.setText("")
         binding.desc.setText("")
         dismiss()

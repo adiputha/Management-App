@@ -3,6 +3,7 @@ package com.example.tasktracker
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasktracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,15 +17,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
         binding.newTaskButton.setOnClickListener{
-                NewTaskSheet().show(supportFragmentManager,"newTask")
+                NewTaskSheet(null).show(supportFragmentManager,"newTask")
         }
 
-        taskViewModel.name.observe(this){
-            binding.taskName.text = String.format("Task Name: %s", it)
-        }
+        setRecycleView()
+    }
 
-        taskViewModel.desc.observe(this){
-            binding.taskDesc.text = String.format("Task Description: %s", it)
+    private fun setRecycleView(){
+        val mainActivity = this
+        taskViewModel.taskItems.observe(this){
+            binding.todoListRecyclerView.apply {
+                layoutManager = LinearLayoutManager(applicationContext)
+                adapter = TaskItemAdapter(it)
+            }
         }
     }
 }

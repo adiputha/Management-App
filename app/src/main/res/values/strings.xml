@@ -4,9 +4,14 @@
     <string name="TaskName">Task Name:</string>
     <string name="TaskDesc">Task Description:</string>
     <string name="NewTask">New Task</string>
+    <string name="EditTask">Edit Task</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Name">Name</string>
     <string name="DescHint">Description</string>
     <string name="sheetName">Name</string>
+
+
+    <string name="place_holder">Place Holder</string>
+    <string name="checkbox">CheckBox</string>
 </resources>
