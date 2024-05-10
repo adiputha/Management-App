@@ -5,6 +5,7 @@
 
 
     <color name="newTaskBtn">#0f3c4c</color>
+    <color name="timeBtn">#4c1f0f</color>
 
     <color name="purple_500">#FF6200EE</color>
 </resources>

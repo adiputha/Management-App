@@ -12,7 +12,7 @@
         android:id="@+id/taskTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Task"
+        android:text="@string/NewTask"
         android:textSize="30sp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
@@ -57,8 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
-        android:backgroundTint="@color/newTaskBtn"
-        android:text="Save"
+        android:backgroundTint="@color/timeBtn"
+        android:text="@string/selectTime"
         android:textColor="@color/white"/>
 
     <com.google.android.material.button.MaterialButton
@@ -68,7 +68,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
         android:backgroundTint="@color/newTaskBtn"
-        android:text="Save"
+        android:text="@string/Save"
         android:textColor="@color/white"/>
 
 </LinearLayout>
