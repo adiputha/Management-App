@@ -3,6 +3,7 @@ package com.example.tasktracker
 import android.content.Context
 import android.graphics.Paint
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasktracker.databinding.FragmentNewTaskSheetBinding
@@ -36,6 +37,11 @@ class TaskItemViewHolder (
 
         binding.taskCardContainer.setOnClickListener {
             clickListener.editTaskItem(taskItem)
+        }
+
+        binding.deleteBtn.setOnClickListener {
+            Toast.makeText(context, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+            clickListener.deleteTaskItem(taskItem)
         }
 
         if (taskItem.dueTime() != null)

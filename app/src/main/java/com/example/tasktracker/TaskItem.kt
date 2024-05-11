@@ -12,11 +12,16 @@ import java.util.UUID
 
 @Entity(tableName = "taskItemTable")
 class TaskItem(
-    @ColumnInfo(name = "name") var name: String,
-    @ColumnInfo(name = "desc") var desc: String,
-    @ColumnInfo(name = "dueTimeString") var dueTimeString: String?,
-    @ColumnInfo(name = "completedTimeString") var completedTimeString: String?,
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
+    @ColumnInfo(name = "name")
+    var name: String,
+    @ColumnInfo(name = "desc")
+    var desc: String,
+    @ColumnInfo(name = "dueTimeString")
+    var dueTimeString: String?,
+    @ColumnInfo(name = "completedTimeString")
+    var completedTimeString: String?,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 )
 {
 
@@ -28,7 +33,7 @@ class TaskItem(
     fun isCompleted() = completedTime() != null
     fun imageResource(): Int = if (isCompleted()) R.drawable.checked_24 else R.drawable.unchecked_24
     fun imageColor(context: Context): Int = if (isCompleted()) purple(context) else black(context)
-    private fun purple(context: Context) = ContextCompat.getColor(context, R.color.purple_500)
+    private fun purple(context: Context) = ContextCompat.getColor(context, R.color.newTaskBtn)
     private fun black(context: Context) = ContextCompat.getColor(context, R.color.black)
 
     companion object{

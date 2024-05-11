@@ -1,7 +1,6 @@
 package com.example.tasktracker
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -21,6 +20,6 @@ interface TaskItemDao {
     @Update
     suspend fun updateTaskItem(taskItem: TaskItem)
 
-    @Delete
-    suspend fun deleteTaskItem(taskItem: TaskItem)
+    @Query("DELETE FROM taskItemTable where id = :id")
+    suspend fun deleteTaskItem(id: Int)
 }

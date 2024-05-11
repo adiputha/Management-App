@@ -32,6 +32,12 @@ class TaskViewModel(private val repository: TaskItemRepo): ViewModel() {
         }
     }
 
+    fun deleteTaskItem(id: Int){
+        viewModelScope.launch {
+            repository.deleteTaskItem(id)
+        }
+    }
+
     fun setCompleted(taskItem: TaskItem) {
         viewModelScope.launch {
             if (!taskItem.isCompleted())
@@ -41,7 +47,8 @@ class TaskViewModel(private val repository: TaskItemRepo): ViewModel() {
     }
 
     class TaskItemModelFactory(private val repository: TaskItemRepo): ViewModelProvider.Factory{
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T
+        {
             if (modelClass.isAssignableFrom(TaskViewModel::class.java))
             return TaskViewModel(repository) as T
 

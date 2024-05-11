@@ -16,4 +16,6 @@
     <string name="place_holder">Place Holder</string>
     <string name="checkbox">CheckBox</string>
     <string name="Save">Save</string>
+
+    <string name="noTaskText">There are no Tasks :(</string>
 </resources>

@@ -12,8 +12,8 @@ class TaskItemAdapter(
     private val clickListener: TaskItemListener
 ): RecyclerView.Adapter<TaskItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder {
-        val from = LayoutInflater.from(parent.context)
-        val binding = TaskItemCardBinding.inflate(from, parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = TaskItemCardBinding.inflate(inflater, parent, false)
         return TaskItemViewHolder(parent.context, binding, clickListener)
     }
 
