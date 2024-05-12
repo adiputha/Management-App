@@ -3,6 +3,8 @@ package com.example.tasktracker
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +14,7 @@ import com.example.tasktracker.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), TaskItemListener {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var emptyTaskView: TextView
     private val taskViewModel: TaskViewModel by viewModels {
         TaskViewModel.TaskItemModelFactory((application as TodoApp).repository)
     }
@@ -20,6 +23,10 @@ class MainActivity : AppCompatActivity(), TaskItemListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
+        emptyTaskView = findViewById(R.id.tvEmptyText)
 
         binding.newTaskButton.setOnClickListener{
                 NewTaskSheet(null).show(supportFragmentManager,"newTask")
@@ -30,16 +37,22 @@ class MainActivity : AppCompatActivity(), TaskItemListener {
 
     private fun setRecycleView(){
         val mainActivity = this
-        taskViewModel.taskItems.observe(this){
+        taskViewModel.allTaskItems.observe(this){taskItems ->
             binding.todoListRecyclerView.apply {
                 layoutManager = LinearLayoutManager(applicationContext)
-                adapter = TaskItemAdapter(it, mainActivity)
+                adapter = TaskItemAdapter(taskItems, mainActivity)
             }
+                if (taskItems.isNullOrEmpty()){
+                    emptyTaskView.visibility = View.VISIBLE
+                }else{
+                    emptyTaskView.visibility = View.GONE
+                }
         }
     }
 
     override fun editTaskItem(taskItem: TaskItem) {
-        NewTaskSheet(taskItem).show(supportFragmentManager,"newTask")
+        val newTaskSheet = NewTaskSheet(taskItem)
+        newTaskSheet.show(supportFragmentManager, "newTask")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

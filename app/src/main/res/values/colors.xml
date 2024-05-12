@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bgBlueish">#e9f6fb</color>
 
 
     <color name="newTaskBtn">#0f3c4c</color>

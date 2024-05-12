@@ -18,6 +18,8 @@ class TaskItem(
     var desc: String,
     @ColumnInfo(name = "dueTimeString")
     var dueTimeString: String?,
+    @ColumnInfo(name = "dueDate")
+    var dueDate: String?,
     @ColumnInfo(name = "completedTimeString")
     var completedTimeString: String?,
     @PrimaryKey(autoGenerate = true)
@@ -30,6 +32,9 @@ class TaskItem(
 
     fun dueTime(): LocalTime? = if (dueTimeString == null) null
         else LocalTime.parse(dueTimeString, timeFormatter)
+
+    fun dueDate(): LocalDate? = if (dueDate == null) null
+        else LocalDate.parse(dueDate, dateFormatter)
     fun isCompleted() = completedTime() != null
     fun imageResource(): Int = if (isCompleted()) R.drawable.checked_24 else R.drawable.unchecked_24
     fun imageColor(context: Context): Int = if (isCompleted()) purple(context) else black(context)

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 class TaskItemRepo (private val taskItemDao: TaskItemDao) {
 
-    val allTaskItems: Flow<List<TaskItem>> = taskItemDao.allTaskItems()
+    val allTaskItems: Flow<List<TaskItem>> = taskItemDao.getAllTaskItems()
 
     @WorkerThread
     suspend fun insertTaskItem(taskItem: TaskItem){

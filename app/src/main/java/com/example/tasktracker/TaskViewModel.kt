@@ -17,7 +17,7 @@ import java.util.UUID
 
 class TaskViewModel(private val repository: TaskItemRepo): ViewModel() {
 
-    var taskItems: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
+    var allTaskItems: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
 
 
     fun addTaskItem(newTask: TaskItem){

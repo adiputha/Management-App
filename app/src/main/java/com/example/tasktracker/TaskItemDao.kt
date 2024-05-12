@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface TaskItemDao {
 
     @Query("SELECT * FROM taskItemTable ORDER BY id ASC")
-    fun allTaskItems(): Flow<List<TaskItem>>
+    fun getAllTaskItems(): Flow<List<TaskItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTaskItem(taskItem: TaskItem)
